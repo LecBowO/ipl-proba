@@ -2,6 +2,9 @@ import pickle
 import streamlit as st
 import pandas as pd
 import sklearn
+import numpy
+
+st.set_page_config(page_title='IPL | PRIDICTOR', page_icon='favicon.ico')
 
 pipe = pickle.load(open('pipe.pkl', 'rb'))
 
@@ -67,5 +70,8 @@ if st.button("Predict Probablity"):
 
     result = pipe.predict_proba(input_data)
 
-    st.text(result)
+    st.subheader(f'{bolling_team} : {round(result[0][0]*100, 3)}%')
+    st.subheader(f'{batting_team} : {round(result[0][1]*100, 3)}%')
+
+
 
